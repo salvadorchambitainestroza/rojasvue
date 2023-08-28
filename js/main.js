@@ -1,31 +1,20 @@
-new Vue({
-    el: '#app',
+var app = new Vue ({
+    el: '#App',
     data: {
         nombre: '',
-        promedio: 0,
+        promedio: '',
         lista: []
     },
     methods: {
-        agregarnota: function() {
-            let estado = '';
-            let estadoColor = '';
-            if (this.promedio >= 7) {
-                estado = 'Aprobado';
-                estadoColor = 'green';
+        agregarnota: function(){
+            if (this.nombre !== "" && this.promedio !== "") {
+                let estado = this.promedio >= 7 ? " Aprobado" : "Reprobado"; 
+                this.lista.push({nombre: this.nombre, promedio: this.promedio, estado: estado});
+                this.nombre = '';
+                this.promedio = '';
             } else {
-                estado = 'Reprobado';
-                estadoColor = 'red';
+                alert('El nombre y promedio son obligatorios');
             }
-
-            this.lista.push({
-                nombre: this.nombre,
-                promedio: this.promedio,
-                estado: estado,
-                estadoColor: estadoColor
-            });
-
-            this.nombre = '';
-            this.promedio = 0;
         }
     }
 });
